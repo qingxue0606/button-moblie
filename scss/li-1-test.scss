@@ -1,0 +1,164 @@
+*{
+	margin: 0;
+	padding: 0;
+
+}
+body{
+	font-size: 12px;
+	padding: 20px;
+
+}
+button{
+	display: block;
+	width: 100%;
+	padding: 10px;
+	margin: 20px 0;
+	background-color: green;
+	border-radius: 10px;
+	color: #fff;
+	border: 1px solid #eee;	
+}
+@-webkit-keyframes waiting-1{
+	0%{
+		-webkit-transform:translate(-5px,0);
+	}
+	50%{
+		-webkit-transform:translate(10px,0);
+	}
+	100%{
+		-webkit-transform:translate(-5px,0);
+	}
+}
+@-webkit-keyframes waiting-2{
+	0%{
+		-webkit-transform:translate(5px,0);
+	}
+	50%{
+		-webkit-transform:translate(-10px,0);
+	}
+	100%{
+		-webkit-transform:translate(5px,0);
+	}
+}
+
+
+
+.g-dialog-container{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.6);
+	display: -webkit-box;
+	-webkit-box-pack:center;
+	-webkit-box-align:center;
+	z-index: 10000;
+
+
+	.dialog-window{
+		padding: 1em;
+		border-radius: 10px;
+		background-color: rgba(0,0,0,0.8);
+		-webkit-transition:all 1.3s ease;
+		.dialog-header{
+			width: 50px;
+			height: 50px;
+			margin: 0 auto;
+			
+			background-repeat: no-repeat;
+			background-size: 50px;
+			display: -webkit-box;
+			-webkit-box-pack:center;
+			-webkit-box-align:center;
+			border: 2px solid #fff;
+			border-radius: 50%;
+			&.ok{
+				
+				&:after{
+					content:"";
+					display: block;
+					width: 30px;
+					height: 10px;
+					border: 2px solid #fff;
+					border-width: 0 0 2px 2px;
+					transform: rotate(-50deg);
+
+				}
+
+			}
+			&.warning{
+				-webkit-transform:rotate(90deg);
+			}
+			&.warning:before{
+				content: "";
+				display: block;
+				width: 20px;
+				height: 5px;
+				background-color: #fff;
+
+			}
+			&.warning:after{
+				content: "";
+				display: block;
+				height: 5px;
+				width: 5px;
+				background-color: #fff;
+				margin-left: 5px;
+			}
+			&.waiting{
+				&:before{
+					content:'';
+					display: block;
+					width: 10px;
+					height: 10px;
+					border-radius: 50%;
+					background-color: yellow;
+					-webkit-animation:waiting-1 1s infinite;
+
+				};
+				&:after{
+					content:'';
+					display: block;
+					width: 10px;
+					height: 10px;
+					border-radius: 50%;
+					background-color: red;
+					-webkit-animation:waiting-2 1s infinite;
+					
+				};
+			}
+
+		}
+		.dialog-content{
+			padding: 1em 1em 0;
+			color: #fff;
+			line-height: 180%;
+			text-align: center;
+		}
+		.dialog-footer{
+			padding: 1em 1em 0;
+			display: -webkit-flex;
+			-webkit-justify-content:center;
+			-webkit-align-items:center;
+			button{
+				-webkit-appearance:normal;
+				background-color: rgba(255,255,255,0.8);
+				padding: 0.8em 1.8em;
+				border: none;
+				color: #eee;
+				border-radius: 5px;
+				margin: 0 0.3em;
+				text-shadow: #666 1px 1px 0;
+				&.green{
+					background-color: rgba(2,202,200,0.8);
+				}
+				&.red{
+					background-color: rgba(251,20,50,0.8);
+				}
+			}
+
+		}
+	}
+
+}

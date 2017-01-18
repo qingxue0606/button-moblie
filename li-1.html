@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<title>移动弹出框组件</title>
+	<link rel="stylesheet" href="css/li-1-test.css">
+</head>
+<body>
+<!-- <div class="g-dialog-container">
+	<div class="dialog-window">
+		<div class="dialog-header waiting"></div>
+		<div class="dialog-content">你是否清空购物车</div>
+		<div class="dialog-footer">
+			<button class="green">按钮1</button>
+			<button class="red">按钮2</button>
+			<button>按钮3</button>
+
+		</div>
+	</div>
+</div> -->
+
+
+
+
+<button id="btn1">没有任何参数（需手动关闭）</button>
+<button id="btn2">弹出一个不带任何按钮，且是仅告的框，2秒后自动关闭</button>
+<button id="btn3">弹出一个有确认按钮和取消按钮的成功框，点击按钮直接关闭</button>
+<button id="btn4">弹出一个有确认按钮的警告框，点击按钮不关闭（需要手动关闭）</button>
+<button id="btn5">弹出一个多组合的按钮框，且按钮样式可定制</button>
+<button id="btn6">弹出一个确认和删除的框，点击确认弹出加载框2秒自动关闭，点击删除按钮把上一次框关闭</button>
+<button id="btn7">弹出一个带动画的对话框</button>
+<button id="btn9">延时关闭加回调函数</button>
+<button id="btn10">遮罩层可以关闭</button>
+	<script src="lib/zepto.js"></script>
+	<script src="js/li-1.js"></script>
+	<script>
+		//$.dialog({type:"waiting"});
+		$('#btn10').tap(function(){
+			$.dialog({
+				type:'warning',
+				message:"遮罩层可以关闭",
+				buttuons:[{
+					text:'按钮A',
+					callback:function(){
+						return false;
+					}
+				}],
+				maskOpacity:0.9,
+				maskClose:true
+
+
+				
+			})
+		})
+		$('#btn9').tap(function(){
+			$.dialog({
+				type:'warning',
+				message:"延时关闭加回调函数",
+				delay:2000,
+				delayCallback:function(){
+					alert('延时关闭加回调函数');
+				}
+			})
+		})
+		$('#btn1').tap(function(){
+			var d=$.dialog();
+		});
+		$('#btn2').tap(function(){
+			var d=$.dialog({
+				type:"warning",
+				delay:2000,
+				message:"两秒后关闭"
+			});
+		});
+		$('#btn3').tap(function(){
+			var d=$.dialog({
+				type:"warning",
+				buttuons:[{
+					type:'ok',
+					text:'确认'
+
+
+				},{
+					type:'ok',
+					text:'确认'
+				}],
+				message:"两秒后关闭"
+			});
+		});
+		$('#btn4').tap(function(){
+			var d=$.dialog({
+				type:"warning",
+				buttuons:[{
+					type:'red',
+					text:'确认',
+					callback:function(){
+						alert('点击我不会关闭')
+						return false;
+					}
+
+
+				}],
+				message:"我叫警告框"
+			});
+		});
+		$('#btn5').tap(function(){
+			var d=$.dialog({
+				type:"waiting",
+				buttuons:[{
+					text:'默认',
+					callback:function(){
+						alert('点击我会关闭');
+					}},{
+					type:'red',
+					text:'确认',
+					callback:function(){
+						alert('点击我不会关闭');
+						return false;
+					}},{
+					type:'green',
+					text:'好吧',
+					callback:function(){
+						alert('点击我会关闭');
+					}}],
+
+				message:"我叫多组合按钮"
+			});
+		});
+		$('#btn6').tap(function(){
+			var dd=$.dialog({
+				type:"waiting",
+				buttuons:[{
+					type:'green',
+					text:'确认',
+					callback:function(){
+						$.dialog({
+							delay:2000,
+							type:"waiting"
+						})
+					}},{
+					type:'red',
+					text:'删除',
+					callback:function(){
+						$.dialog({
+							type:'warning',
+							buttuons:[{
+								type:'red',
+								text:'删除之前的弹框',
+								callback:function(){
+									dd.close();
+									return false;
+								}
+							}]
+						});
+						
+						return false;
+					}}],
+
+				message:"我叫多组合按钮"
+			});
+		});
+		$('#btn7').tap(function(){
+			$.dialog({
+				type:"warning",
+				message:"你想干嘛？",
+				buttuons:[{
+					type:'green',
+					text:'你好？'
+				},{
+				type:'red',
+				text:'不好！'
+				}],
+				effect:true
+			});
+		});
+
+		// var d=$.dialog({
+		// 	buttuons:[
+		// 		{
+		// 			type:"red",
+		// 			text:"不好",
+		// 			callback:function(){
+		// 				alert("1");
+		// 				return false;
+		// 			}
+		// 		},
+		// 		{
+		// 			type:"green",
+		// 			text:"好啊",
+		// 			callback:function(){
+		// 				alert("2");
+		// 			}
+		// 		}
+		// 	],
+		// 	//对话框的类型
+		// 	type:"waiting",
+		// 	//弹出框延时多久关闭
+		// 	delay:null,
+		// 	//对话框的提示信息
+		// 	message:"你还好吗？",
+		// 	// 对话框的宽
+		// 	// width:100,
+		// 	// height:null,
+		// 	//对话框遮罩层透明度，
+		// 	maskOpacity:0.4
+		// }); 
+
+		// var d=new Dialog();
+
+
+
+	</script>
+</body>
+</html>
